@@ -1,0 +1,104 @@
+mysql> select * from course;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into  course values(1,'sam','f',2,45,67);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from course;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        1 | sam        | f          |     2 |     45 |    67 |
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
+
+
+mysql> select max(hallno) from course;
++-------------+
+| max(hallno) |
++-------------+
+|          45 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from course where hallno between 19 and 46;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        1 | sam        | f          |     2 |     45 |    67 |
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct hallno from course;
++--------+
+| hallno |
++--------+
+|     45 |
+|     20 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select all semno from course where true;
++-------+
+| semno |
++-------+
+|     2 |
+|     1 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from course where semno in(2);
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        1 | sam        | f          |     2 |     45 |    67 |
++----------+------------+------------+-------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from course where not semno=2;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select *from course where semno not in(2);
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select min(semno) from course;
++------------+
+| min(semno) |
++------------+
+|          1 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(semno) from course;
++------------+
+| avg(semno) |
++------------+
+|     1.5000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(semno) from course;
++------------+
+| sum(semno) |
++------------+
+|          3 |
++------------+
+1 row in set (0.00 sec)
+
