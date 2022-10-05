@@ -1,0 +1,35 @@
+mysql> select courseno, count(courseno) from course group by courseno;
++----------+-----------------+
+| courseno | count(courseno) |
++----------+-----------------+
+|        1 |               1 |
+|        8 |               1 |
++----------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select coursetype semno from course order by hallno;
++-------+
+| semno |
++-------+
+| u     |
+| f     |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from course order by coursetype;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        1 | sam        | f          |     2 |     45 |    67 |
+|        8 | prgm       | u          |     1 |     20 |    12 |
++----------+------------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from course order by semno;
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        8 | prgm       | u          |     1 |     20 |    12 |
+|        1 | sam        | f          |     2 |     45 |    67 |
++----------+------------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
