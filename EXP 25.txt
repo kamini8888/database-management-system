@@ -1,0 +1,91 @@
+mysql> \c
+mysql> create database student_progress;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use student_progress;
+Database changed
+mysql>  create table student_progress(std_no int(10),std_name varchar(15),subject varchar(15),marks int(10));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc student_progress;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| std_no   | int         | YES  |     | NULL    |       |
+| std_name | varchar(15) | YES  |     | NULL    |       |
+| subject  | varchar(15) | YES  |     | NULL    |       |
+| marks    | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student_progress values(1,'carl','physics',78),(2,'karen','chemistry',98),(3,'samantha','maths',100);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>  select * from student_progress;
++--------+----------+-----------+-------+
+| std_no | std_name | subject   | marks |
++--------+----------+-----------+-------+
+|      1 | carl     | physics   |    78 |
+|      2 | karen    | chemistry |    98 |
+|      3 | samantha | maths     |   100 |
++--------+----------+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student_progress add std_dept varchar(20);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  select * from student_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | carl     | physics   |    78 | NULL     |
+|      2 | karen    | chemistry |    98 | NULL     |
+|      3 | samantha | maths     |   100 | NULL     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql>  update student_progress set std_dept='IT' where std_name='carl';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select * from student_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | carl     | physics   |    78 | IT       |
+|      2 | karen    | chemistry |    98 | NULL     |
+|      3 | samantha | maths     |   100 | NULL     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql>  update student_progress set std_dept='BIOMED' where marks=98;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select * from student_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | carl     | physics   |    78 | IT       |
+|      2 | karen    | chemistry |    98 | BIOMED   |
+|      3 | samantha | maths     |   100 | NULL     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql>  update student_progress set std_dept='ARTS' where subject='maths' ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select * from student_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | carl     | physics   |    78 | IT       |
+|      2 | karen    | chemistry |    98 | BIOMED   |
+|      3 | samantha | maths     |   100 | ARTS     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql>
