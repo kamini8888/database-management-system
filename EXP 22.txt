@@ -1,0 +1,119 @@
+
+mysql> create database book;
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  show databases;
++--------------------+
+| Database           |
++--------------------+
+| book               |
+| class              |
+| course             |
+| employee           |
+| faculty            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student            |
+| sys                |
+| worker             |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql>  use book;
+Database changed
+mysql> create table book(publisher_name varchar(10),book_name varchar(20),written_by varchar(20),cost int(10));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql>  desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | YES  |     | NULL    |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(20) | YES  |     | NULL    |       |
+| cost           | int(10)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table book add primary key(publisher_name);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI | NULL    |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(20) | YES  |     | NULL    |       |
+| cost           | int(10)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into book values('sam','the great island','matthew',90000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book values('kanye','the immortals','sen',3500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into book values('north','the god','west',9500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into book values('adams','knight insider','desi',8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book values('walker','faded','alan',2000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  select * from book;
++----------------+------------------+------------+-------+
+| publisher_name | book_name        | written_by | cost  |
++----------------+------------------+------------+-------+
+| adams          | knight insider   | desi       |  8000 |
+| kanye          | the immortals    | sen        |  3500 |
+| north          | the god          | west       |  9500 |
+| sam            | the great island | matthew    | 90000 |
+| walker         | faded            | alan       |  2000 |
++----------------+------------------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select publisher_name from book where cost<=800;
+Empty set (0.00 sec)
+
+mysql> select publisher_name from book where cost<=8000;
++----------------+
+| publisher_name |
++----------------+
+| adams          |
+| kanye          |
+| walker         |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) from book where cost>=4000;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> alter table book add constraint book_name_unique unique(cost);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI | NULL    |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(20) | YES  |     | NULL    |       |
+| cost           | int(10)     | YES  | UNI | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
