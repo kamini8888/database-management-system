@@ -1,0 +1,51 @@
+mysql> \c
+mysql> use car;
+Database changed
+mysql>  create table car(carno int,carname varchar(15),dor date,returndate date);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc car;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| carno      | int         | YES  |     | NULL    |       |
+| carname    | varchar(15) | YES  |     | NULL    |       |
+| dor        | date        | YES  |     | NULL    |       |
+| returndate | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>   insert into car values (1,'bugatti','2018-11-23','2020-12-13'),(2,'rolls royce','2009-02-14','2010-07-16'),(3,'ferrari','2015-09-29','2014-10-24'),(4,'audi','2017-12-08','2016-02-22');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from car;
++-------+-------------+------------+------------+
+| carno | carname     | dor        | returndate |
++-------+-------------+------------+------------+
+|     1 | bugatti     | 2018-11-23 | 2020-12-13 |
+|     2 | rolls royce | 2009-02-14 | 2010-07-16 |
+|     3 | ferrari     | 2015-09-29 | 2014-10-24 |
+|     4 | audi        | 2017-12-08 | 2016-02-22 |
++-------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select carname,dor,returndate from car where carno<4;
++-------------+------------+------------+
+| carname     | dor        | returndate |
++-------------+------------+------------+
+| bugatti     | 2018-11-23 | 2020-12-13 |
+| rolls royce | 2009-02-14 | 2010-07-16 |
+| ferrari     | 2015-09-29 | 2014-10-24 |
++-------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select carname from car where carno=4;
++---------+
+| carname |
++---------+
+| audi    |
++---------+
+1 row in set (0.00 sec)
+
+mysql>
