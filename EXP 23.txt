@@ -1,0 +1,39 @@
+mysql> create database hospital;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use hospital;
+Database changed
+mysql> create table hospital(pno int,pname varchar(15),admitdate date,ischarge date);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>  insert into hospital values(1,'ananya','2004-02-03','2004-02-04');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into hospital values(2,'felix','2012-02-14','2012-04-16');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into hospital values(3,'barbz','2016-10-29','2016-08-22');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from hospital;
++------+--------+------------+------------+
+| pno  | pname  | admitdate  | ischarge   |
++------+--------+------------+------------+
+|    1 | ananya | 2004-02-03 | 2004-02-04 |
+|    2 | felix  | 2012-02-14 | 2012-04-16 |
+|    3 | barbz  | 2016-10-29 | 2016-08-22 |
++------+--------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from hospital where pno=1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from hospital;
++------+-------+------------+------------+
+| pno  | pname | admitdate  | ischarge   |
++------+-------+------------+------------+
+|    2 | felix | 2012-02-14 | 2012-04-16 |
+|    3 | barbz | 2016-10-29 | 2016-08-22 |
++------+-------+------------+------------+
+2 rows in set (0.00 sec)
+
