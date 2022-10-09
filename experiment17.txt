@@ -1,0 +1,84 @@
+mysql> create database tutorials;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use tutorials;
+Database changed
+mysql> CREATE TABLE tutorials (
+    ->    ID INT PRIMARY KEY,
+    ->    TITLE VARCHAR(100),
+    ->    AUTHOR VARCHAR(40),
+    ->    DATE VARCHAR(40)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into tutorials values(1, 'Java', 'Krishna', '2019-09-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tutorials values(2, 'JFreeCharts', 'Satish', '2019-05-01');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tutorials values(3, 'JavaSprings', 'Amit', '2019-05-01');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tutorials values(4, 'Android', 'Ram', '2019-03-01');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tutorials values(5, 'Cassandra', 'Pruthvi', '2019-04-06');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from tutorials;
++----+-------------+---------+------------+
+| ID | TITLE       | AUTHOR  | DATE       |
++----+-------------+---------+------------+
+|  1 | Java        | Krishna | 2019-09-01 |
+|  2 | JFreeCharts | Satish  | 2019-05-01 |
+|  3 | JavaSprings | Amit    | 2019-05-01 |
+|  4 | Android     | Ram     | 2019-03-01 |
+|  5 | Cassandra   | Pruthvi | 2019-04-06 |
++----+-------------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE backup (
+    ->    ID INT,
+    ->    TITLE VARCHAR(100),
+    ->    AUTHOR VARCHAR(40),
+    ->    DATE VARCHAR(40)
+    -> );
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE ExampleProc()
+    ->    BEGIN
+    ->       DECLARE done INT DEFAULT 0;
+    ->       DECLARE tutorialID INTEGER;
+    ->       DECLARE tutorialTitle, tutorialAuthor, tutorialDate VARCHAR(20);
+    ->       DECLARE cur CURSOR FOR SELECT * FROM tutorials;
+    ->       DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    ->       OPEN cur;
+    ->       label: LOOP
+    ->       FETCH cur INTO tutorialID, tutorialTitle, tutorialAuthor, tutorialDate;
+    ->       INSERT INTO backup VALUES(tutorialID, tutorialTitle, tutorialAuthor, tutorialDate);
+    ->       IF done = 1 THEN LEAVE label;
+    ->       END IF;
+    ->       END LOOP;
+    ->       CLOSE cur;
+    ->    END; //
+ERROR 1304 (42000): PROCEDURE ExampleProc already exists
+mysql> CALL ExampleProc;
+    -> //
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from backup;
+    -> //
++------+-------------+---------+------------+
+| ID   | TITLE       | AUTHOR  | DATE       |
++------+-------------+---------+------------+
+|    1 | Java        | Krishna | 2019-09-01 |
+|    2 | JFreeCharts | Satish  | 2019-05-01 |
+|    3 | JavaSprings | Amit    | 2019-05-01 |
+|    4 | Android     | Ram     | 2019-03-01 |
+|    5 | Cassandra   | Pruthvi | 2019-04-06 |
+|    5 | Cassandra   | Pruthvi | 2019-04-06 |
++------+-------------+---------+------------+
+6 rows in set (0.00 sec)
