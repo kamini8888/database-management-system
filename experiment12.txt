@@ -1,0 +1,81 @@
+mysql> use course;
+Database changed
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE doiterate(p1 INT)
+    -> BEGIN
+    ->   label1: LOOP
+    ->     SET p1 = p1 + 1;
+    ->     IF p1 < 10 THEN
+    ->       ITERATE label1;
+    ->     END IF;
+    ->     LEAVE label1;
+    ->   END LOOP label1;
+    ->   SET @x = p1;
+    -> END; //
+Query OK, 0 rows affected (0.01 sec)
+ call doiterate(2);
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+mysql> CALL doiterate('2');
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from course;
+    -> //
++----------+------------+------------+-------+--------+-------+
+| courseno | coursedesc | coursetype | semno | hallno | Facno |
++----------+------------+------------+-------+--------+-------+
+|        2 | sam        | f          |     2 |     45 |    67 |
+|        5 | damon      | m          |     4 |     68 |    90 |
++----------+------------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
+
+
+mysql> use course;
+Database changed
+mysql> DELIMITER |
+mysql>
+mysql>
+mysql> CREATE PROCEDURE a()
+    -> BEGIN
+    ->     DECLARE v INT DEFAULT 1;
+    ->
+    ->     CASE v
+    ->       WHEN 2 THEN SELECT v;
+    ->       WHEN 3 THEN SELECT 0;
+    ->       ELSE
+    ->         BEGIN
+    ->         END;
+    ->     END CASE;
+    ->   END;
+    ->   |
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER //
+mysql> CREATE DEFINER=`root`@`127.0.0.1`
+    -> PROCEDURE `GetUserName`(INOUT user_name varchar(16),
+    -> IN user_id varchar(16))
+    -> BEGIN
+    -> DECLARE uname varchar(16);
+    -> SELECT name INTO uname
+    -> FROM user
+    -> WHERE userid = user_id;
+    -> IF user_id = "scott"
+    -> THEN
+    -> SET user_name = "Scott";
+    -> ELSEIF user_id = "ferp"
+    -> THEN
+    -> SET user_name = "Palash";
+    -> ELSEIF user_id = "diana"
+    -> THEN
+    -> SET user_name = "Diana";
+    -> END IF;
+    -> END; //
+mysql> CALL GetUserName(@A,'scott') //
+
+mysql> SELECT @A; //
++------------+
+| @A         |
++------------+
+|scott       |
++------------+
