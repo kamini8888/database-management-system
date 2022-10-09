@@ -1,0 +1,21 @@
+mysql> use course;
+Database changed
+mysql> DELIMITER //
+mysql>  CREATE PROCEDURE HelloWorld()
+    -> BEGIN
+    -> SELECT 'Hello World..' AS Message;
+    ->  END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CALL HelloWorld();
+    -> //
++---------------+
+| Message       |
++---------------+
+| Hello World.. |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
