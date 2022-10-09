@@ -1,0 +1,40 @@
+mysql> select dname,count(*) from employee,department where dnum=dno groupby dname
+having count(*) >2;
+
++----------------+-------+
+| dname          | count |
++----------------+-------+
+| research       |   4   |
+| administration |   3   |
++----------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select fname,lname,bdate from employee where bdate between'1960-01-01' and
+'1969-12-31';
+
++-------------+------------+------------+
+| fname       | lname      | bdate      |
++-------------+------------+------------+
+| john        | smith      | 1965-01-09 |
+| alicia      | zeleva     | 1968-01-19 |
+| ramesh      | narayan    | 1962-09-15 |
+| ahmad       | jabbar     | 1969-03-29 |
++-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+
+mysql> select fname,lname,dname from employee join department on dno=dnum;
+
++-------------+------------+-----------------+
+| fname       | lname      | dname           |
++-------------+------------+-----------------+
+| joyce       | english    | research        |
+| ramesh      | narayan    | research        |
+| franklin    | wong       | research        |
+| john        | smith      | research        |
+| ahmad       | jabbar     | administration  | 
+| jennifer    | walace     | administration  |
+| alicia      | zeleva     | administration  |
+| james       | borg       | headquarters    |
++-------------+------------+-----------------+
+8 rows in set (0.00 sec)
