@@ -1,0 +1,37 @@
+mysql> select fname,lname,eno,sal, 1.1*sal as insal 
+from employee where eno=5;
+
++------------+-------------+------+---------+---------+
+| fname      | lname       | eno  |  sal    |insal    |
++------------+-------------+------+---------+---------+
+| john       | smith       | 5    | 30000   | 33000.0 |
+| franklin   | wong        | 5    | 40000   | 44000.0 |
+| rames      | narayan     | 5    | 38000   | 41800.0 |
+| joyce      | english     | 5    | 25000   | 27500.0 |
++------------+-------------+------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select sum(sal),max(sal),min(sal),avg(sal) from employee where eno=5;
++-------+-------------+------------+------------+
+|sum    | max         | min        | avg        |
++-------+-------------+------------+------------+
+|133000 | 40000       | 25000      | 33250.00   |
++-------+-------------+------------+------------+
+1 rows in set (0.00 sec)
+
+mysql> select e.fname,e.lname from employee where exists (select eno
+from employee where e.eno=5;
+
++------------+---------+
+| fname      | lname   |
++------------+---------+
+| john       | smith   |
+| franklin   | wong    |
+| ramesh     | narayan |    
+| joyce      | english | 
++------------+---------+
+4 rows in set (0.00 sec)
+
+
+
+
